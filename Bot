@@ -1,0 +1,47 @@
+import os
+import discord
+import random
+from discord.ext import commands
+# Zmienna intencje przechowuje uprawnienia bota
+intents = discord.Intents.default()
+# Włączanie uprawnienia do czytania wiadomości
+intents.message_content = True
+# Tworzenie bota w zmiennej klienta i przekazanie mu uprawnień
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+
+@bot.event
+async def on_ready():
+    print(f'Zalogowaliśmy się jako {bot.user}')
+
+@bot.command()
+async def hello (ctx):
+    await ctx.send("czejść")
+
+@bot.command()
+async def bye (ctx):
+    await ctx.send("\\U0001f642")
+
+@bot.command()
+async def films_eko (ctx):
+    await ctx.send("Cowspiracy, tajemnica równowagi ekologicznej środowiska,Chasing Ice")
+
+@bot.command()
+async def books_eko (ctx):
+    await ctx.send("Świat na rozdrożu")
+
+@bot.command()
+async def books_eko_kids (ctx):
+    await ctx.send("Śmieci")
+
+@bot.command()
+async def echo (ctx, messages):
+    await ctx.sent(messages)
+@bot.command()
+async def meme (ctx):
+    plik = random.choice(os.listdir('images'))
+    with open(f"Zdjęcia/{plik}","rb")as f:
+        mem = discord.File(f)
+    await ctx.send(file=mem)
+
+bot.run("MTI0MTMyNTI2MzMyNjAxOTU5NA.GmU2aw.BRLLR8MBWag8NaaThDaQINo_a-faknbXp0mEAk")
